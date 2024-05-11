@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisposableDomainDetector.API", "DisposableDomainDetector.API\DisposableDomainDetector.API.csproj", "{6A81B2A5-6A4F-414C-8FE5-797A775C1A20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisposableDomainDetector.Core", "DisposableDomainDetector.Core\DisposableDomainDetector.Core.csproj", "{8FED5967-6D2C-4E99-90F7-7AF0D1F86317}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A81B2A5-6A4F-414C-8FE5-797A775C1A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A81B2A5-6A4F-414C-8FE5-797A775C1A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A81B2A5-6A4F-414C-8FE5-797A775C1A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A81B2A5-6A4F-414C-8FE5-797A775C1A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FED5967-6D2C-4E99-90F7-7AF0D1F86317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FED5967-6D2C-4E99-90F7-7AF0D1F86317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FED5967-6D2C-4E99-90F7-7AF0D1F86317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FED5967-6D2C-4E99-90F7-7AF0D1F86317}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {144B42AC-90F3-4A9C-9503-F51EF63BC938}
+	EndGlobalSection
+EndGlobal
