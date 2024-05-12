@@ -10,8 +10,6 @@ using DisposableDomainDetector.API.Settings;
 using DisposableDomainDetector.Core.Configuration;
 using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Interfaces;
 using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Implementations;
-using DisposableDomainDetector.Core.DataAccess.Redis.Interfaces;
-using DisposableDomainDetector.Core.DataAccess.Redis.Implementations;
 using DisposableDomainDetector.Core.Business.Interfaces;
 using DisposableDomainDetector.Core.Business.Implementations;
 
@@ -25,8 +23,7 @@ namespace DisposableDomainDetector.API.Extensions
 
         private static IServiceCollection AddDataAccessLayer(this IServiceCollection services) =>
             services
-                .AddSingleton<IDisposableDomainService, DisposableDomainService>()
-                .AddSingleton<IRedisRepository, RedisRepository>();
+                .AddSingleton<IDisposableDomainService, DisposableDomainService>();
 
         private static IServiceCollection AddSettings(this IServiceCollection services, AppSettings appSettings)
         {
@@ -34,7 +31,6 @@ namespace DisposableDomainDetector.API.Extensions
                 throw new ArgumentNullException(nameof(appSettings));
 
             services.AddSingleton<IDisposableDomainConfiguration>(appSettings.DisposableDomains);
-            services.AddSingleton<IRedisConfiguration>(appSettings.Redis);
 
             return services;
         }
