@@ -4,7 +4,7 @@ namespace DisposableDomainDetector.API.Settings
 {
     public class RedisElement : IRedisConfiguration
     {
-        public int ConnectionTimeout { get; set; }
+        public int ConnectTimeout { get; set; }
 
         public int ExpiryInMinutes { get; set; }
 

@@ -2,7 +2,7 @@
 {
     public interface IRedisConfiguration
     {
-        int ConnectionTimeout { get; }
+        int ConnectTimeout { get; }
 
         int ExpiryInMinutes { get; }
 
