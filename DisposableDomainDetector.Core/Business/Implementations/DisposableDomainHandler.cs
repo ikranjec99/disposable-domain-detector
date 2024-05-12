@@ -1,9 +1,9 @@
 ﻿using DisposableDomainDetector.Core.Business.Exceptions;
 using DisposableDomainDetector.Core.Business.Interfaces;
 using DisposableDomainDetector.Core.Configuration;
-using DisposableDomainDetector.Core.Extensions;
 using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Constants;
 using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Interfaces;
+using DisposableDomainDetector.Core.Extensions;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
@@ -32,6 +32,7 @@ namespace DisposableDomainDetector.Core.Business.Implementations
         {
             try
             {
+                _logger.LogTryHasDisposableDomain(GetDomain(email));
                 string result = await FetchDisposableDomains();
 
                 return IsDisposableDomain(result, email);
@@ -49,7 +50,7 @@ namespace DisposableDomainDetector.Core.Business.Implementations
 
         private bool IsDisposableDomain(string domainList, string email)
         {
-            string lowercaseDomain = email.Split('@').ElementAtOrDefault(1).ToLower();
+            string lowercaseDomain = GetDomain(email);
             var disposableDomains = domainList.Split("\n").ToList();
 
             return disposableDomains.Contains(lowercaseDomain);
@@ -77,10 +78,14 @@ namespace DisposableDomainDetector.Core.Business.Implementations
             }
         }
 
+        private string GetDomain(string email) => email.Split('@').ElementAtOrDefault(1).ToLower();
+
         private void InMemoryCacheSync(string result)
         {
+            string cacheKey = Cache.DisposableDomainsKey;
+            _logger.LogTryInMemoryCacheSync(cacheKey);
             var expiration = DateTimeOffset.Now.AddMinutes(_configuration.ExpiryInMinutes);
-            _memoryCache.Set(Cache.DisposableDomainsKey, result, expiration);
+            _memoryCache.Set(cacheKey, result, expiration);
         }
     }
 }
