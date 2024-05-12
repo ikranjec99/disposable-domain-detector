@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DisposableDomainDetector.API.Controllers
 {
     [ApiVersion("1.0")]
-    [Route("api/disposable-domain-detector/{version:apiVersion}/")]
+    [Route("api/{version:apiVersion}/disposable-domain-detector")]
     [ApiController]
     public class DisposableDomainDetectorController : ControllerBase
     {
