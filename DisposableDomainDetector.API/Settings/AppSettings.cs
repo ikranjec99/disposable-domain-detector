@@ -6,5 +6,8 @@ namespace DisposableDomainDetector.API.Settings
     {
         [Required]
         public required DisposableDomainElement DisposableDomains { get; set; }
+
+        [Required]
+        public required RedisElement Redis { get; set; }
     }
 }
