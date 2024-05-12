@@ -202,7 +202,7 @@ namespace DisposableDomainDetector.Core.DataAccess
             if (fragments is null || fragments.Contains(null)) 
                 throw new ArgumentNullException(nameof(fragments));
 
-            return string.Join("/", fragments.Select(x => x.Trim('/'));
+            return string.Join("/", fragments.Select(x => x.Trim('/')));
         }
 
         /// <summary>
