@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.DataProtection.Repositories;
-using Serilog.Events;
+﻿using Serilog.Events;
 using Serilog;
 using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using DisposableDomainDetector.API.Helpers;
@@ -10,28 +8,33 @@ using DisposableDomainDetector.API.Filters;
 using DisposableDomainDetector.API.Providers;
 using DisposableDomainDetector.API.Settings;
 using DisposableDomainDetector.Core.Configuration;
+using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Interfaces;
+using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Implementations;
+using DisposableDomainDetector.Core.DataAccess.Redis.Interfaces;
+using DisposableDomainDetector.Core.DataAccess.Redis.Implementations;
+using DisposableDomainDetector.Core.Business.Interfaces;
+using DisposableDomainDetector.Core.Business.Implementations;
 
 namespace DisposableDomainDetector.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        /*
         private static IServiceCollection AddBusinessLayer(this IServiceCollection services) =>
             services
-                .AddScoped<ISomeHandler, SomeHandler>();
-        */
+                .AddScoped<IDisposableDomainHandler, DisposableDomainHandler>();
 
-        /*
         private static IServiceCollection AddDataAccessLayer(this IServiceCollection services) =>
             services
-                .AddSingleton<ISomeService, SomeService>();
-        */
+                .AddSingleton<IDisposableDomainService, DisposableDomainService>()
+                .AddSingleton<IRedisRepository, RedisRepository>();
+
         private static IServiceCollection AddSettings(this IServiceCollection services, AppSettings appSettings)
         {
             if (appSettings is null)
                 throw new ArgumentNullException(nameof(appSettings));
 
-            services.AddSingleton<IDisposableDomainServiceConfiguration>(appSettings.DisposableDomains);
+            services.AddSingleton<IDisposableDomainConfiguration>(appSettings.DisposableDomains);
+            services.AddSingleton<IRedisConfiguration>(appSettings.Redis);
 
             return services;
         }
@@ -85,6 +88,7 @@ namespace DisposableDomainDetector.API.Extensions
                          }));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMemoryCache();
 
             services
                 .AddApiVersioning(setup =>
@@ -94,9 +98,9 @@ namespace DisposableDomainDetector.API.Extensions
                     setup.ErrorResponses = new ApiVersioningErrorResponseProvider();
                 })
                 .AddRouting(options => options.LowercaseUrls = true)
-                //.AddSettings(appSettings)
-                //.AddBusinessLayer()
-                //.AddDataAccessLayer()
+                .AddSettings(appSettings)
+                .AddBusinessLayer()
+                .AddDataAccessLayer()
                 .AddHttpContextAccessor();
         }
     }
