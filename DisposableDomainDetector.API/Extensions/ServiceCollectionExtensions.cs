@@ -12,6 +12,7 @@ using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Interfaces;
 using DisposableDomainDetector.Core.DataAccess.DisposableDomains.Implementations;
 using DisposableDomainDetector.Core.Business.Interfaces;
 using DisposableDomainDetector.Core.Business.Implementations;
+using Destructurama;
 
 namespace DisposableDomainDetector.API.Extensions
 {
@@ -44,6 +45,7 @@ namespace DisposableDomainDetector.API.Extensions
                 .ReadFrom.Configuration(configuration)
                 .Enrich.FromLogContext()
                 .Destructure.With<NullIgnoringDestructuringPolicy>()
+                .Destructure.UsingAttributes()
                 .CreateLogger();
 
             return services;

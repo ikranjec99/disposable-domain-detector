@@ -1,4 +1,10 @@
-﻿namespace DisposableDomainDetector.Core.Business.Models
+﻿using Destructurama.Attributed;
+
+namespace DisposableDomainDetector.Core.Business.Models
 {
-    public record GetIsDisposableEmailDomainRequest(string Email);
+    public class GetIsDisposableEmailDomainRequest
+    {
+        [LogMasked]
+        public required string Email { get; set; }
+    }
 }
