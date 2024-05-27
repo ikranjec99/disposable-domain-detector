@@ -1,0 +1,5 @@
+# disposable-domain-detector
+
+A .NET Core-based API that detects disposable email addresses, enhancing the reliability and quality of user registrations. 
+This service quickly identifies temporary email domains, preventing fraudulent sign-ups and ensuring a more secure user database.
+It uses reliable  [open source list](https://github.com/disposable/disposable-email-domains) and caches all results after first fetch. 
